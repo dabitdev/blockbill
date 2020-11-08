@@ -25,6 +25,6 @@ Postgress and Hashura console
 https://blockbill.hasura.app/console/
 
 ----------------------------------
-This is the Meridian 2020 hackaton project made by [@dabitdev] (https://github.com/dabitdev) and [@narayanansampath] (https://github.com/narayanansampath).
+This is the Meridian 2020 hackaton project made by [@dabitdev](https://github.com/dabitdev) and [@narayanansampath](https://github.com/narayanansampath).
 The project has a frontend part implemented in Flutter and a postgress database and a GraphQL api.
 
