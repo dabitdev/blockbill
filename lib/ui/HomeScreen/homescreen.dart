@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
-  String accountId = "SBVR2EG5JWLAQLML36R3WKRBQNNP4PPCLKXT4SCJ5G2M7J7V4S56O4OK";
+  String accountId = "GBIWJ2CY7KCT2HU56TG62THEXSYWHBKGNSOVBDATHHINOWMXYWW2LC2B";
   //String accountId = "GCG6LFUSPOHGV4BECL6TJBJO66KYAN5FPO6ZCW3PTPM364DJEGXLTULF";
   stellarSdk.AccountResponse account;
   final formatter = NumberFormat.currency(locale: 'en-ca', symbol: "\$", decimalDigits: 2);
@@ -101,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
         balances['Stellar Lumens'] = '${balance.balance} XLM';
       else balances[balance.assetCode] = balances[balance.balance];
     }
-    print(stellarSdk.KeyPair.fromSecretSeed("SAIV4NA2CSC26XDYYDQXC4ZGX77IRC3HH6T4OJ5AJSEJA3QUG3OULHRU").accountId);
     bal = "${double.parse(account.balances[0].balance).toStringAsFixed(5)} XLM";
     setState(() => isLoading = false);
   }

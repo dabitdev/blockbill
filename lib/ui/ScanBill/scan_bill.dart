@@ -37,6 +37,11 @@ class _ScanBillState extends State<ScanBill> {
         ),
         floatingActionButton: NextButton(
           onPressed: (){},
+          gradient: LinearGradient(
+            colors: [Color(0xff006EE0), Color(0xff0038AE)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
         body: _buildBody()
     );

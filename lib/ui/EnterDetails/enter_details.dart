@@ -87,6 +87,11 @@ class EnterDetails extends StatelessWidget {
       ),
       floatingActionButton: NextButton(
         onPressed: () => _onSubmit(),
+        gradient: LinearGradient(
+          colors: [Color(0xff006EE0), Color(0xff0038AE)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
       ),
     );
   }

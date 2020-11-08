@@ -31,11 +31,11 @@ class BalanceWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal:15.0, vertical: 50),
+            padding: const EdgeInsets.fromLTRB(15.0,65.0,15.0,30.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/plane.png'),
+                Container(height:70, width: 70, child: Image.asset('assets/plane.png')),
                 CircleAvatar(backgroundColor: Colors.white.withOpacity(0.8), radius: 25, child: Icon(Icons.person_outline),),
               ],
             ),
