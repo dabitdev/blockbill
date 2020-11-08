@@ -63,17 +63,17 @@ class ClaimableRequest extends StatelessWidget {
                   onPressed:() =>
                   {
                    if (addressController.text.isNotEmpty && amountController.text.isNotEmpty)
-                    _showMaterialDialog(
+                    _sendMaterialDialog(
                         context, addressController.text, amountController.text)
                   },
                 ),
                 CustomButton(
                     title: 'Create Claimable\nBalance',
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => _showMaterialDialog(context, null, null))),
-                    ),
+                    onPressed: () =>  {
+                      if (addressController.text.isNotEmpty && amountController.text.isNotEmpty)
+                        _createClaimMaterialDialog(
+                            context, addressController.text, amountController.text)
+                    })
               ],
             ),
           ],
@@ -82,7 +82,7 @@ class ClaimableRequest extends StatelessWidget {
     );
   }
 
-  _showMaterialDialog(context, address, amount) {
+  _sendMaterialDialog(context, address, amount) {
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
@@ -129,6 +129,31 @@ class ClaimableRequest extends StatelessWidget {
     if (response.success) {
       _showPaymentSent(context, address, amount);
     }
+  }
+
+  _createClaimMaterialDialog(context, address, amount) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+          title: new Text("Are you sure you want to send..."),
+          content: new Text("The amount of " + amount + " XLM" + " to the address:" + address),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+            ,
+            FlatButton(
+              child: Text('Proceed'),
+              onPressed: () {
+                _create_claim_balance(context, address, amount);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ));
   }
 
   _create_claim_balance(context, address, amount) async {
