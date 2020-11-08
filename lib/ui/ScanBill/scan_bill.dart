@@ -49,7 +49,12 @@ class _ScanBillState extends State<ScanBill> {
       try {
         var currentLabels = await detector.detectFromPath(_file?.path);
         setState(() => _currentLabels = currentLabels);
-        total = getTotalAmount(_currentLabels);
+        try {
+          total = getTotalAmount(_currentLabels);
+        } catch (e) {
+          total = 0;
+          print(e);
+        }
         setState(() => isLoading = false);
       } catch (e) {
         print(e.toString());
@@ -95,8 +100,6 @@ class _ScanBillState extends State<ScanBill> {
     return SingleChildScrollView(
       child: Column(
               children: <Widget>[
-                isLoading ?
-                Container() :
           _buildImage(),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.25,
@@ -161,7 +164,7 @@ class _ScanBillState extends State<ScanBill> {
 
   Widget _buildRow(String text) {
     return ListTile(
-      title: Text('item: ${text}', style: Theme.of(context).textTheme.subtitle1,),
+      title: Text('item: $text', style: Theme.of(context).textTheme.subtitle1,),
       dense: true,
     );
   }

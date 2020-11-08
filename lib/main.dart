@@ -1,4 +1,5 @@
 import 'package:blockbill/ui/homescreen/homescreen.dart';
+import 'package:blockbill/ui/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: SplashScreenPage(),
       debugShowCheckedModeBanner: false,
     );
   }

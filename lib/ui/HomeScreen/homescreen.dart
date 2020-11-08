@@ -8,13 +8,17 @@ import 'package:intl/intl.dart';
 import 'balance_widget.dart';
 
 class HomeScreen extends StatefulWidget {
+
+  final String accountId;
+  HomeScreen({this.accountId});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
-  String accountId = "GBIWJ2CY7KCT2HU56TG62THEXSYWHBKGNSOVBDATHHINOWMXYWW2LC2B";
+  String accountId = "SBVR2EG5JWLAQLML36R3WKRBQNNP4PPCLKXT4SCJ5G2M7J7V4S56O4OK";
   //String accountId = "GCG6LFUSPOHGV4BECL6TJBJO66KYAN5FPO6ZCW3PTPM364DJEGXLTULF";
   stellarSdk.AccountResponse account;
   final formatter = NumberFormat.currency(locale: 'en-ca', symbol: "\$", decimalDigits: 2);
@@ -25,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    if(widget.accountId != null)
+    accountId = widget.accountId;
     setState(() => isLoading = true);
     balanceWidget();
   }
@@ -90,7 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future balanceWidget() async {
-    account = await sdk.accounts.account(accountId);
+    if(widget.accountId != null){
+      account = await sdk.accounts.account(stellarSdk.KeyPair.fromSecretSeed(widget.accountId).accountId);
+    }
+    else account = await sdk.accounts.account(accountId);
     print("sequence number: ${account.sequenceNumber}");
     for (stellarSdk.Balance balance in account.balances) {
       if(balance.assetType == stellarSdk.Asset.TYPE_NATIVE)
