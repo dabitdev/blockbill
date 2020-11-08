@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
   }
 
   getAccountId() async {
-    accountId = await localStorage.read('accounst_id');
+    accountId = await localStorage.read('account_id');
     if(accountId != null) hasAccountId = true;
     return accountId;
   }
