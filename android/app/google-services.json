@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1087309882159",
+    "firebase_url": "https://blockbill-1984.firebaseio.com",
+    "project_id": "blockbill-1984",
+    "storage_bucket": "blockbill-1984.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087309882159:android:b80c4cc8848c2cd966b7da",
+        "android_client_info": {
+          "package_name": "com.nordicloop.blockbill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087309882159-vlilv8makn8ugn8p4g8t42kl4n41fm89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLvkqdJdgNtO7wSi2F79X4SY9cDETzzew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087309882159-vlilv8makn8ugn8p4g8t42kl4n41fm89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

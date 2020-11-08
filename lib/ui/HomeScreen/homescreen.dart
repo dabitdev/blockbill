@@ -1,7 +1,10 @@
+import 'package:blockbill/ui/RequestScreen/request_screen.dart';
 import 'package:blockbill/utils/widgets/transaction_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart' as stellarSdk;
 import 'package:intl/intl.dart';
+
+import 'balance_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -31,49 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(40)),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0xff006EE0).withOpacity(0.3),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: Offset(0, 8), // changes position of shadow
-                ),
-              ],
-              gradient: LinearGradient(
-                colors: [Color(0xff006EE0), Color(0xff0038AE)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:15.0, vertical: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset('assets/plane.png'),
-                      CircleAvatar(backgroundColor: Colors.white.withOpacity(0.8), radius: 25, child: Icon(Icons.person_outline),),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:15.0, vertical: 8.0),
-                  child: isLoading ? CircularProgressIndicator() :
-                  Text(bal, style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.white),),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text('Your Balance', style: Theme.of(context).textTheme.subtitle1.copyWith(color: Colors.white)),
-                )
-              ],
-            ),
-          ),
+          BalanceWidget(isLoading: isLoading, bal: bal),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -88,10 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               TransactionButton(
-                text: 'Receive \nMoney',
+                text: 'Request \nPayment',
                 textColor: Colors.black,
                 icon: Icons.archive_outlined,
-                color: Colors.white
+                color: Colors.white,
+                onPressed: () =>  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => RequestScreen(bal: bal))),
               )
             ],
           ),
@@ -104,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Center(child: CircularProgressIndicator())
             : ListView.separated(
                 shrinkWrap: true,
-                //physics: NeverScrollableScrollPhysics(),
                 separatorBuilder: (BuildContext context, int index) =>
                     Divider(),
                 itemCount: balances.length,
@@ -128,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         balances['Stellar Lumens'] = '${balance.balance} XLM';
       else balances[balance.assetCode] = balances[balance.balance];
     }
-    //print(stellarSdk.KeyPair.fromSecretSeed("SAIV4NA2CSC26XDYYDQXC4ZGX77IRC3HH6T4OJ5AJSEJA3QUG3OULHRU").accountId);
+    print(stellarSdk.KeyPair.fromSecretSeed("SAIV4NA2CSC26XDYYDQXC4ZGX77IRC3HH6T4OJ5AJSEJA3QUG3OULHRU").accountId);
     bal = "${double.parse(account.balances[0].balance).toStringAsFixed(5)} XLM";
     setState(() => isLoading = false);
   }

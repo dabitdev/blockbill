@@ -26,6 +26,8 @@ dependencies:
   cupertino_icons: ^1.0.0
   stellar_flutter_sdk: ^1.1.0
   intl: 0.16.1
+  mlkit: ^0.15.1
+  image_picker: ^0.6.7+12
 
 dev_dependencies:
   flutter_test:
