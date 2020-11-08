@@ -64,7 +64,7 @@ class EnterDetails extends StatelessWidget {
                       hintText: 'Currency',
                       border: InputBorder.none,
                       prefixIcon: Icon(Icons.attach_money)),
-                  controller: currencyController,
+                  controller: currencyController..text = "USD",
                   validator: formValidation,
                 ),
               ),
@@ -120,7 +120,7 @@ class EnterDetails extends StatelessWidget {
         ),
       ),
       floatingActionButton: NextButton(
-        onPressed: () => _onSubmit(),
+        onPressed: () => _onSubmit(context),
         gradient: LinearGradient(
           colors: [Color(0xff006EE0), Color(0xff0038AE)],
           begin: Alignment.topLeft,
@@ -130,12 +130,15 @@ class EnterDetails extends StatelessWidget {
     );
   }
 
-  _onSubmit() async {
+  _onSubmit(context) async {
     Scaffold.of(_formKey.currentContext).removeCurrentSnackBar();
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   String formValidation(String value) {
