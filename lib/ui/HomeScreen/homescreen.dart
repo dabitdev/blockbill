@@ -7,6 +7,10 @@ import 'package:intl/intl.dart';
 import 'balance_widget.dart';
 
 class HomeScreen extends StatefulWidget {
+
+  final String accountId;
+  HomeScreen({this.accountId});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -24,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    if(widget.accountId != null)
+    accountId = widget.accountId;
     setState(() => isLoading = true);
     balanceWidget();
   }
