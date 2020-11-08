@@ -6,7 +6,12 @@ BlockBill is a solution that enables users to seamlessly track and files expense
 
 <img width="450px" src="/assets/twoscreens.png"/>
 
-How does it work?
+### Supported Platforms:
+ * iOS
+ * Android
+
+
+### How does it work?
 - BlockBill extracts the data automatically from a bill/invoice allowing the user to simply request a payment by scanning any bill/invoice on the app. 
 - Payments can be requested to anyone who is already in the stellar network
 - The expense recipient will be notified when a payment request has been created
