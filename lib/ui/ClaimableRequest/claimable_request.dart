@@ -1,9 +1,7 @@
 
 import 'package:blockbill/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart' as xlm;
-
-final xlm.StellarSDK sdk = xlm.StellarSDK.TESTNET;
+import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart' as stellarSdk;
 
 class ClaimableRequest extends StatelessWidget {
   final String balance;
@@ -22,7 +20,7 @@ class ClaimableRequest extends StatelessWidget {
             AppBar(
               title: Text("Send Money"),
               leading: GestureDetector(
-                onTap: () { /* Write listener code here */ },
+                onTap: () {  Navigator.of(context).pop(); },
                 child: Icon(
                   Icons.arrow_back,  // add custom icons also
                 ),
@@ -110,54 +108,55 @@ class ClaimableRequest extends StatelessWidget {
   }
 
   _send(context, address, amount) async {
-    xlm.KeyPair senderKeyPair = xlm.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
+    final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
+
+    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
     String destination = address;
 
-    xlm.AccountResponse account = await sdk.accounts.account(senderKeyPair.accountId);
-
     // Load sender account data from the stellar network.
-    xlm.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
+    stellarSdk.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
 
     // Build the transaction to send 100 XLM native payment from sender to destination
-    xlm.Transaction transaction = new xlm.TransactionBuilder(sender)
-        .addOperation(xlm.PaymentOperationBuilder(destination, xlm.Asset.NATIVE, amount).build())
+    stellarSdk.Transaction transaction = new stellarSdk.TransactionBuilder(sender)
+        .addOperation(stellarSdk.PaymentOperationBuilder(destination, stellarSdk.Asset.NATIVE, amount).build())
         .build();
 
     // Sign the transaction with the sender's key pair.
-    transaction.sign(senderKeyPair, xlm.Network.TESTNET);
+    transaction.sign(senderKeyPair, stellarSdk.Network.TESTNET);
 
     // Submit the transaction to the stellar network.
-    xlm.SubmitTransactionResponse response = await sdk.submitTransaction(transaction);
+    stellarSdk.SubmitTransactionResponse response = await sdk.submitTransaction(transaction);
     if (response.success) {
       _showPaymentSent(context, address, amount);
     }
   }
 
   _create_claim_balance(context, address, amount) async {
-    xlm.KeyPair senderKeyPair = xlm.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
+    final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
+    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
 
     // Load sender account data from the stellar network.
-    xlm.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
-    xlm.XdrClaimPredicate predicate = new xlm.XdrClaimPredicate();
+    stellarSdk.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
+    stellarSdk.XdrClaimPredicate predicate = new stellarSdk.XdrClaimPredicate();
 
-    List<xlm.Claimant> claimants = new List();
+    List<stellarSdk.Claimant> claimants = new List();
 
-    xlm.Claimant claimant = new xlm.Claimant(address, predicate);
-    xlm.Claimant senderClaimant = new xlm.Claimant(senderKeyPair.accountId, predicate);
+    stellarSdk.Claimant claimant = new stellarSdk.Claimant(address, predicate);
+    stellarSdk.Claimant senderClaimant = new stellarSdk.Claimant(senderKeyPair.accountId, predicate);
 
     claimants.add(senderClaimant);
     claimants.add(claimant);
 
     // Build the transaction to send 100 XLM native payment from sender to destination
-    xlm.Transaction transaction = new xlm.TransactionBuilder(sender)
-        .addOperation(xlm.CreateClaimableBalanceOperationBuilder(claimants, xlm.AssetTypeNative(), amount).build())
+    stellarSdk.Transaction transaction = new stellarSdk.TransactionBuilder(sender)
+        .addOperation(stellarSdk.CreateClaimableBalanceOperationBuilder(claimants, stellarSdk.AssetTypeNative(), amount).build())
         .build();
 
     // Sign the transaction with the sender's key pair.
-    transaction.sign(senderKeyPair, xlm.Network.TESTNET);
+    transaction.sign(senderKeyPair, stellarSdk.Network.TESTNET);
 
     // Submit the transaction to the stellar network.
-    xlm.SubmitTransactionResponse response = await sdk.submitTransaction(transaction);
+    stellarSdk.SubmitTransactionResponse response = await sdk.submitTransaction(transaction);
     if (response.success) {
       _showPaymentSent(context, address, amount);
     }
