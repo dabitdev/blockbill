@@ -1,6 +1,4 @@
-<p align="center">
-   <img width="500px" src="/assets/bakcgroundblockbill.png"/>
-</p>
+<img width="700px" src="/assets/bakcgroundblockbill.png"/>
 
 A descentralized blockchain expense management system for personal and business powered by the Stellar Network. 
 
