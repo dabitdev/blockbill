@@ -5,7 +5,7 @@ A descentralized blockchain expense management system for personal and business 
 BlockBill is a solution that enables users to seamlessly track and files expenses between Stellar wallets.
 
 <img width="300px" src="/assets/screen1.png"/>
-
+<br>
 <img width="300px" src="/assets/screen2.png"/>
 
 How does it work?
@@ -15,9 +15,9 @@ How does it work?
 - Once notified, he/she would be able to review all the details from the bill/invoice and decide if make the payment right away or create a claim balance using the new brand feature of Stellar Protocol 15
 
 <img width="800px" src="/assets/diagram.png"/>
-
+<br>
 <img width="300px" src="/assets/screen3.png"/>
-
+<br>
 <img width="300px" src="/assets/screen4.png"/>
 
 GraphQL scheme
