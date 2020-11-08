@@ -73,7 +73,7 @@ class ClaimableRequest extends StatelessWidget {
                     title: 'Create Claimable\nBalance',
                     onPressed: () =>  {
                       if (addressController.text.isNotEmpty && amountController.text.isNotEmpty)
-                        _createClaimMaterialDialog(
+                        _showClaimOptions(
                             context, addressController.text, amountController.text)
                     })
               ],
@@ -133,30 +133,30 @@ class ClaimableRequest extends StatelessWidget {
     }
   }
 
-  _createClaimMaterialDialog(context, address, amount) {
-    showDialog(
-        context: context,
-        builder: (_) => new AlertDialog(
-          title: new Text("Are you sure you want to send..."),
-          content: new Text("The amount of " + amount + " XLM" + " to the address:" + address),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-            ,
-            FlatButton(
-              child: Text('Proceed'),
-              onPressed: () {
-                _createClaimBalance(context, address, amount);
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ));
-  }
+  // _createClaimMaterialDialog(context, address, amount) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (_) => new AlertDialog(
+  //         title: new Text("Are you sure you want to send..."),
+  //         content: new Text("The amount of " + amount + " XLM" + " to the address:" + address),
+  //         actions: <Widget>[
+  //           FlatButton(
+  //             child: Text('Cancel'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           )
+  //           ,
+  //           FlatButton(
+  //             child: Text('Proceed'),
+  //             onPressed: () {
+  //               _createClaimBalance(context, address, amount);
+  //               Navigator.of(context).pop();
+  //             },
+  //           )
+  //         ],
+  //       ));
+  // }
 
   _createClaimBalance(context, address, amount) async {
     final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
@@ -196,6 +196,31 @@ class ClaimableRequest extends StatelessWidget {
         builder: (_) => new AlertDialog(
           title: new Text("Payment Sent!"),
           content: new Text("The amount of " + amount + " XLM" + " to the address:" + address),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ));
+  }
+
+  _showClaimOptions(context, address, amount) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+          title: new Text("Create Claimable Balance, select within days"),
+          content: TextField(
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(15.0),
+                hintText: 'within days',
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.calendar_today_outlined)),
+            controller: addressController..text="30",
+          ),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),

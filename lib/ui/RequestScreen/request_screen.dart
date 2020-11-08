@@ -19,7 +19,15 @@ class RequestScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            BalanceWidget(bal: bal, isLoading: false),
+            AppBar(
+              title: Text("Create Payment Request"),
+              leading: GestureDetector(
+                onTap: () {  Navigator.of(context).pop(); },
+                child: Icon(
+                  Icons.arrow_back,  // add custom icons also
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
