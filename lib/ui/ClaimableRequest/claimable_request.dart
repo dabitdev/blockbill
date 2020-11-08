@@ -2,11 +2,13 @@
 import 'package:blockbill/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart' as stellarSdk;
+import 'package:blockbill/utils/local_storage.dart';
 
 class ClaimableRequest extends StatelessWidget {
   final String balance;
   final TextEditingController amountController = new TextEditingController();
   final TextEditingController addressController = new TextEditingController();
+  final LocalStorage localStorage = LocalStorage();
 
   ClaimableRequest({this.balance});
 
@@ -109,8 +111,8 @@ class ClaimableRequest extends StatelessWidget {
 
   _send(context, address, amount) async {
     final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
-
-    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
+    final accountId = await localStorage.read('account_id');
+    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed(accountId);
     String destination = address;
 
     // Load sender account data from the stellar network.
@@ -148,7 +150,7 @@ class ClaimableRequest extends StatelessWidget {
             FlatButton(
               child: Text('Proceed'),
               onPressed: () {
-                _create_claim_balance(context, address, amount);
+                _createClaimBalance(context, address, amount);
                 Navigator.of(context).pop();
               },
             )
@@ -156,9 +158,10 @@ class ClaimableRequest extends StatelessWidget {
         ));
   }
 
-  _create_claim_balance(context, address, amount) async {
+  _createClaimBalance(context, address, amount) async {
     final stellarSdk.StellarSDK sdk = stellarSdk.StellarSDK.TESTNET;
-    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
+    final accountId = await localStorage.read('account_id');
+    stellarSdk.KeyPair senderKeyPair = stellarSdk.KeyPair.fromSecretSeed(accountId);
 
     // Load sender account data from the stellar network.
     stellarSdk.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
@@ -191,12 +194,13 @@ class ClaimableRequest extends StatelessWidget {
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
-          title: new Text("Payment Send!"),
+          title: new Text("Payment Sent!"),
           content: new Text("The amount of " + amount + " XLM" + " to the address:" + address),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
             )
