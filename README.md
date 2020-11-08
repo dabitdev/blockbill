@@ -12,7 +12,7 @@ How does it work?
 - The expense recipient will be notified when a payment request has been created
 - Once notified, he/she would be able to review all the details from the bill/invoice and decide if make the payment right away or create a claim balance using the new brand feature of Stellar Protocol 15
 
-<img width="300px" src="/assets/diagram.png"/>
+<img width="800px" src="/assets/diagram.png"/>
 
 <img width="300px" src="/assets/screen2.png"/>
 
