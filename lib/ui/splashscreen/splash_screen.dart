@@ -128,7 +128,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
           MaterialPageRoute(builder: (BuildContext context) => HomeScreen(accountId: accountId)));
     } catch (e) {
       print(e);
-      _key.currentState.showSnackBar(SnackBar(content: Text('error occured, please check if account id is valid')));
+      _key.currentState.showSnackBar(SnackBar(content: Text('error occurred, please check if account id is valid')));
     }
   }
 }
