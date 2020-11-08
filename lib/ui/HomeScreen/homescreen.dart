@@ -1,4 +1,5 @@
 import 'package:blockbill/ui/RequestScreen/request_screen.dart';
+import 'package:blockbill/ui/ClaimableRequest/claimable_request.dart';
 import 'package:blockbill/utils/widgets/transaction_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart' as stellarSdk;
@@ -53,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
+                onPressed: () =>  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ClaimableRequest(balance: bal))),
               ),
               TransactionButton(
                 text: 'Request \nPayment',
