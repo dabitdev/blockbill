@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
       children: <TextSpan>[
         new TextSpan(
             text: 'BLOCK', style: new TextStyle(color: Colors.white, fontSize: 35)),
-        new TextSpan(text: 'BILL', style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+        new TextSpan(text: '₿ILL', style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
       ],
     ),
   );

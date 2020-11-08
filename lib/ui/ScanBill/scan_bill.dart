@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:blockbill/ui/EnterDetails/enter_details.dart';
 import 'package:blockbill/utils/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,12 +37,14 @@ class _ScanBillState extends State<ScanBill> {
           centerTitle: true,
         ),
         floatingActionButton: NextButton(
-          onPressed: (){},
           gradient: LinearGradient(
             colors: [Color(0xff006EE0), Color(0xff0038AE)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => EnterDetails(total: total, file: _file))),
         ),
         body: _buildBody()
     );
@@ -74,7 +77,7 @@ class _ScanBillState extends State<ScanBill> {
       height: MediaQuery.of(context).size.height * 0.50,
       child: new Center(
         child: _file == null
-            ? Text('No Image')
+            ? Text('Loading')
             : new FutureBuilder<Size>(
           future: _getImageSize(Image.file(File(_file.path), fit: BoxFit.fitWidth)),
           builder: (BuildContext context, AsyncSnapshot<Size> snapshot) {

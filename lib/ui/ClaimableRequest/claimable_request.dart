@@ -15,19 +15,14 @@ class ClaimableRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Send Money"),
+        automaticallyImplyLeading: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            AppBar(
-              title: Text("Send Money"),
-              leading: GestureDetector(
-                onTap: () {  Navigator.of(context).pop(); },
-                child: Icon(
-                  Icons.arrow_back,  // add custom icons also
-                ),
-              ),
-            ),
             Container(
               margin: EdgeInsets.all(20),
               decoration: BoxDecoration(

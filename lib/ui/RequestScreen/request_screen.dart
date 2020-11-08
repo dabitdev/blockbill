@@ -71,7 +71,7 @@ class RequestScreen extends StatelessWidget {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => EnterDetails(bal:bal))),
+                            builder: (BuildContext context) => EnterDetails())),
                     ),
               ],
             ),

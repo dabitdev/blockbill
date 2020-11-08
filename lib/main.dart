@@ -1,4 +1,3 @@
-import 'package:blockbill/ui/homescreen/homescreen.dart';
 import 'package:blockbill/ui/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
