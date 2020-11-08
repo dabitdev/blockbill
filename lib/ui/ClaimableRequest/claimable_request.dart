@@ -133,6 +133,36 @@ class ClaimableRequest extends StatelessWidget {
     }
   }
 
+  _create_claim_balance(context, address, amount) async {
+    xlm.KeyPair senderKeyPair = xlm.KeyPair.fromSecretSeed("SDMU2TAI4HA3VANAG7EQCT3N7IYWDUXPK37OCX4DGCGZTTUUWDJXIIUZ");
+
+    // Load sender account data from the stellar network.
+    xlm.AccountResponse sender = await sdk.accounts.account(senderKeyPair.accountId);
+    xlm.XdrClaimPredicate predicate = new xlm.XdrClaimPredicate();
+
+    List<xlm.Claimant> claimants = new List();
+
+    xlm.Claimant claimant = new xlm.Claimant(address, predicate);
+    xlm.Claimant senderClaimant = new xlm.Claimant(senderKeyPair.accountId, predicate);
+
+    claimants.add(senderClaimant);
+    claimants.add(claimant);
+
+    // Build the transaction to send 100 XLM native payment from sender to destination
+    xlm.Transaction transaction = new xlm.TransactionBuilder(sender)
+        .addOperation(xlm.CreateClaimableBalanceOperationBuilder(claimants, xlm.AssetTypeNative(), amount).build())
+        .build();
+
+    // Sign the transaction with the sender's key pair.
+    transaction.sign(senderKeyPair, xlm.Network.TESTNET);
+
+    // Submit the transaction to the stellar network.
+    xlm.SubmitTransactionResponse response = await sdk.submitTransaction(transaction);
+    if (response.success) {
+      _showPaymentSent(context, address, amount);
+    }
+  }
+
   _showPaymentSent(context, address, amount) {
     showDialog(
         context: context,
