@@ -188,7 +188,7 @@ class _ScanBillState extends State<ScanBill> {
       print('File Uploaded');
       storageReference.getDownloadURL().then((fileURL) {
         print(fileURL);
-        return _uploadedFileUrl = fileURL;
+        return fileURL;
       });
   }
 }
