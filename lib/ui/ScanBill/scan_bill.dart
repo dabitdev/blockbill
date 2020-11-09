@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:blockbill/ui/EnterDetails/enter_details.dart';
 import 'package:blockbill/utils/widgets/next_button.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mlkit/mlkit.dart';
 import 'dart:math';
+import 'package:path/path.dart' as Path;
 
 class ScanBill extends StatefulWidget {
   @override
@@ -63,6 +64,7 @@ class _ScanBillState extends State<ScanBill> {
           total = 0;
           print(e);
         }
+        if(_file!=null) uploadImageToFirebase(context);
         setState(() => isLoading = false);
       } catch (e) {
         print(e.toString());
@@ -175,6 +177,19 @@ class _ScanBillState extends State<ScanBill> {
       title: Text('item: $text', style: Theme.of(context).textTheme.subtitle1,),
       dense: true,
     );
+  }
+
+  Future uploadImageToFirebase(BuildContext context) async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('bills/${Path.basename(_file.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(File(_file.path));
+    await uploadTask.onComplete;
+      print('File Uploaded');
+      storageReference.getDownloadURL().then((fileURL) {
+        print(fileURL);
+        return _uploadedFileUrl = fileURL;
+      });
   }
 }
 

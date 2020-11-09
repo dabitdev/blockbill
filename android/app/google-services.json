@@ -30,6 +30,13 @@
             {
               "client_id": "1087309882159-vlilv8makn8ugn8p4g8t42kl4n41fm89.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1087309882159-e85cnk2i10vaf7051d0st7dk3pqrn6kg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nordicloop.blockbill"
+              }
             }
           ]
         }
