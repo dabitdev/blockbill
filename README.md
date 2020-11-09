@@ -1,6 +1,6 @@
 <img width="700px" src="/assets/bakcgroundblockbill.png"/>
 
-A descentralized blockchain expense management system for personal and business powered by the Stellar Network. 
+A decentralized blockchain expense management system for personal and business powered by the Stellar Network. 
 
 BlockBill is a solution that enables users to seamlessly track and files expenses between Stellar wallets.
 

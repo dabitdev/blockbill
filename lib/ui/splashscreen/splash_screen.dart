@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
                   blockBill,
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('A descentralized blockchain expense management system.', style: Theme.of(context).textTheme.subtitle1.copyWith(fontSize: 18,color: Colors.white),textAlign: TextAlign.center,),
+                    child: Text('A decentralized blockchain expense management system.', style: Theme.of(context).textTheme.subtitle1.copyWith(fontSize: 18,color: Colors.white),textAlign: TextAlign.center,),
                   ),
                   FutureBuilder(
                     future: getAccountId(),
