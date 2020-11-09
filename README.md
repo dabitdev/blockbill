@@ -12,7 +12,7 @@ BlockBill is a solution that enables users to seamlessly track and files expense
 
 
 ### How does it work?
-- BlockBill extracts the data automatically from a bill/invoice allowing the user to simply request a payment by scanning any bill/invoice on the app. 
+- BlockBill extracts the data automatically from a bill/invoice allowing the user to simply request a payment by scanning them on the app. 
 - Payments can be requested to anyone who is already in the stellar network
 - The expense recipient will be notified when a payment request has been created
 - Once notified, he/she would be able to review all the details from the bill/invoice and decide if make the payment right away or create a claim balance using the new brand feature of Stellar Protocol 15
